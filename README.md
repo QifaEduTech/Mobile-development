@@ -13,15 +13,40 @@
 
 ## 大文件（Release）
 
-GitHub 单文件硬限制 100 MB，下列三个包不进入 Git 历史，改为在 [Releases](../../releases) 下载：
+GitHub 单文件硬限制 100 MB，且大文件单次 POST 在国内线路上极易中断，下列资源不进入 Git 历史，改为在 [Releases](../../releases) 以 40 MB 分卷发布。
 
-| Release 文件 | 放回本地后的文件名 | 大小 | 用途 |
+| Release 附件 | 大小 | 合并后的文件 | 用途 |
 | --- | --- | --- | --- |
-| `B-resource-library.zip` | `B-素材库.zip` | 63.2 MB | 通用素材包（图片、图标、字体、切图） |
-| `B-native-plugins.zip` | `B-原生第三方插件.zip` | 147.6 MB | 原生插件（相机、扫码、地图、推送等） |
-| `B-offline-packaging-SDK.zip` | `B-离线打包SDK.zip` | 221.5 MB | Android 离线打包 SDK（Android Studio 工程与依赖） |
+| `B-resource-library.zip` | 63.2 MB | `B-素材库.zip` | 通用素材包（图片、图标、字体、切图） |
+| `B-native-plugins.zip.part01` ~ `part04` | 147.6 MB | `B-原生第三方插件.zip` | 原生插件（相机、扫码、地图、推送等） |
+| `B-offline-packaging-SDK.zip.part01` ~ `part06` | 221.5 MB | `B-离线打包SDK.zip` | Android 离线打包 SDK（Android Studio 工程与依赖） |
 
-> Release 附件的文件名被 GitHub 强制为 ASCII，中文名放在上表对照。下载后可按「放回本地后的文件名」重命名，放到仓库根目录的 `B/` 下（与 `B-5+App离线打包文档.doc` 同级）。两种名字都已在 `.gitignore` 中排除，是否重命名都不会误提交。
+### 分卷合并
+
+把分卷下载到同一目录，按 part 序号拼接（顺序不能乱，缺一段就解压失败）：
+
+```bat
+copy /b B-native-plugins.zip.part01+B-native-plugins.zip.part02+B-native-plugins.zip.part03+B-native-plugins.zip.part04 "B-原生第三方插件.zip"
+copy /b B-offline-packaging-SDK.zip.part01+B-offline-packaging-SDK.zip.part02+B-offline-packaging-SDK.zip.part03+B-offline-packaging-SDK.zip.part04+B-offline-packaging-SDK.zip.part05+B-offline-packaging-SDK.zip.part06 "B-离线打包SDK.zip"
+```
+
+或 PowerShell：
+
+```powershell
+function Merge-Parts($pattern, $out) {
+  $fs = [IO.File]::Create($out)
+  Get-ChildItem $pattern | Sort-Object Name | ForEach-Object {
+    $in = [IO.File]::OpenRead($_.FullName); $in.CopyTo($fs); $in.Close()
+  }
+  $fs.Close()
+}
+Merge-Parts 'B-native-plugins.zip.part*'        'B-原生第三方插件.zip'
+Merge-Parts 'B-offline-packaging-SDK.zip.part*' 'B-离线打包SDK.zip'
+```
+
+合并后放进仓库根目录的 `B/` 下（与 `B-5+App离线打包文档.doc` 同级）。
+
+> Release 附件名被 GitHub 强制为 ASCII，中文名见上表「合并后的文件」列。原始中文名与这些 ASCII 名都已写进 `.gitignore`，放回 `B/` 后不会误提交。
 
 ## 技术栈
 
