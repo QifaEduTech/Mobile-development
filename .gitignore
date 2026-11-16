@@ -1,0 +1,9 @@
+# 大体积二进制资源：不纳入 Git 跟踪（本地保留，或用 GitHub Release / Git LFS 分发）
+B/B-素材库.zip
+B/B-原生第三方插件.zip
+B/B-离线打包SDK.zip
+
+# 系统/编辑器临时文件
+Thumbs.db
+desktop.ini
+.DS_Store
