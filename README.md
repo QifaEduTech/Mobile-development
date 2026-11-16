@@ -48,6 +48,14 @@ Merge-Parts 'B-offline-packaging-SDK.zip.part*' 'B-离线打包SDK.zip'
 
 > Release 附件名被 GitHub 强制为 ASCII，中文名见上表「合并后的文件」列。原始中文名与这些 ASCII 名都已写进 `.gitignore`，放回 `B/` 后不会误提交。
 
+### 下载提示
+
+Release 附件由 `objects.githubusercontent.com` 提供，国内直连常见长时间 0 字节或 `Connection was reset`。除浏览器挂代理外，命令行可显式指定本地 socks5：
+
+```powershell
+curl.exe -L --proxy socks5h://127.0.0.1:10808 -O https://github.com/QifaEduTech/Mobile-development/releases/download/v1.0/B-offline-packaging-SDK.zip.part01
+```
+
 ## 技术栈
 
 - HBuilderX / uni-app / 5+App，Android 离线打包
