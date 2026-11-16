@@ -15,13 +15,13 @@
 
 GitHub 单文件硬限制 100 MB，下列三个包不进入 Git 历史，改为在 [Releases](../../releases) 下载：
 
-| 文件 | 大小 | 用途 |
-| --- | --- | --- |
-| `B-素材库.zip` | 63.2 MB | 通用素材包（图片、图标、字体、切图） |
-| `B-原生第三方插件.zip` | 147.6 MB | 原生插件（相机、扫码、地图、推送等） |
-| `B-离线打包SDK.zip` | 221.5 MB | Android 离线打包 SDK（Android Studio 工程与依赖） |
+| Release 文件 | 放回本地后的文件名 | 大小 | 用途 |
+| --- | --- | --- | --- |
+| `B-resource-library.zip` | `B-素材库.zip` | 63.2 MB | 通用素材包（图片、图标、字体、切图） |
+| `B-native-plugins.zip` | `B-原生第三方插件.zip` | 147.6 MB | 原生插件（相机、扫码、地图、推送等） |
+| `B-offline-packaging-SDK.zip` | `B-离线打包SDK.zip` | 221.5 MB | Android 离线打包 SDK（Android Studio 工程与依赖） |
 
-下载后放回 `B/` 目录，与 `B-5+App离线打包文档.doc` 同级即可。三个包已在 `.gitignore` 中排除，放回后不会误提交。
+> Release 附件的文件名被 GitHub 强制为 ASCII，中文名放在上表对照。下载后可按「放回本地后的文件名」重命名，放到仓库根目录的 `B/` 下（与 `B-5+App离线打包文档.doc` 同级）。两种名字都已在 `.gitignore` 中排除，是否重命名都不会误提交。
 
 ## 技术栈
 

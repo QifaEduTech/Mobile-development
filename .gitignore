@@ -2,6 +2,10 @@
 B/B-素材库.zip
 B/B-原生第三方插件.zip
 B/B-离线打包SDK.zip
+# 从 Release 下载后的 ASCII 文件名
+B/B-resource-library.zip
+B/B-native-plugins.zip
+B/B-offline-packaging-SDK.zip
 
 # 系统/编辑器临时文件
 Thumbs.db
